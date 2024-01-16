@@ -1,0 +1,7 @@
+C:\Users\jesse\source\repos\StudentEnrolmentSystem\StudentEnrolmentSystem\bin\StudentEnrolmentSystem.dll.config
+C:\Users\jesse\source\repos\StudentEnrolmentSystem\StudentEnrolmentSystem\bin\StudentEnrolmentSystem.dll
+C:\Users\jesse\source\repos\StudentEnrolmentSystem\StudentEnrolmentSystem\bin\StudentEnrolmentSystem.pdb
+C:\Users\jesse\source\repos\StudentEnrolmentSystem\StudentEnrolmentSystem\obj\Release\StudentEnrolmentSystem.csproj.AssemblyReference.cache
+C:\Users\jesse\source\repos\StudentEnrolmentSystem\StudentEnrolmentSystem\obj\Release\StudentEnrolmentSystem.csproj.CoreCompileInputs.cache
+C:\Users\jesse\source\repos\StudentEnrolmentSystem\StudentEnrolmentSystem\obj\Release\StudentEnrolmentSystem.dll
+C:\Users\jesse\source\repos\StudentEnrolmentSystem\StudentEnrolmentSystem\obj\Release\StudentEnrolmentSystem.pdb

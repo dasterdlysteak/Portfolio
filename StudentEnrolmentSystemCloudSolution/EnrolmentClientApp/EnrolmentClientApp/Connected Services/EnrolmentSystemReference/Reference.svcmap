@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="3bf17648-c028-4d09-ae7b-72ed556e7008" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="https://studentenrolmentsystem20231110133131.azurewebsites.net/EnrolmentSystem.svc?wsdl" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="EnrolmentSystem.xsd" MetadataType="Schema" ID="3d4d8b4c-4e4e-45a6-8505-561df71c0fdf" SourceId="1" SourceUrl="https://studentenrolmentsystem20231110133131.azurewebsites.net/EnrolmentSystem.svc?xsd=xsd2" />
+    <MetadataFile FileName="EnrolmentSystem.wsdl" MetadataType="Wsdl" ID="c5dc15f2-5e79-4ad5-927b-1e625e7340fb" SourceId="1" SourceUrl="https://studentenrolmentsystem20231110133131.azurewebsites.net/EnrolmentSystem.svc?wsdl" />
+    <MetadataFile FileName="EnrolmentSystem1.xsd" MetadataType="Schema" ID="63b62589-1430-4412-a474-e819f34e7591" SourceId="1" SourceUrl="https://studentenrolmentsystem20231110133131.azurewebsites.net/EnrolmentSystem.svc?xsd=xsd1" />
+    <MetadataFile FileName="EnrolmentSystem2.xsd" MetadataType="Schema" ID="f9bd5fb3-a422-4579-9f2a-3f16279b2890" SourceId="1" SourceUrl="https://studentenrolmentsystem20231110133131.azurewebsites.net/EnrolmentSystem.svc?xsd=xsd3" />
+    <MetadataFile FileName="EnrolmentSystem3.xsd" MetadataType="Schema" ID="5b3e30dc-3c7b-4f7f-9992-9ad541faeb24" SourceId="1" SourceUrl="https://studentenrolmentsystem20231110133131.azurewebsites.net/EnrolmentSystem.svc?xsd=xsd0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

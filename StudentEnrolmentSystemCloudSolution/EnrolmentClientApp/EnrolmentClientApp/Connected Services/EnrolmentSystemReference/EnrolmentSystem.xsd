@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/StudentEnrolmentSystem" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/StudentEnrolmentSystem" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ArrayOfCourse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Course" nillable="true" type="tns:Course" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCourse" nillable="true" type="tns:ArrayOfCourse" />
+  <xs:complexType name="Course">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="allottedTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="cost" type="xs:decimal" />
+      <xs:element minOccurs="0" name="courseID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="courseName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Course" nillable="true" type="tns:Course" />
+  <xs:complexType name="ArrayOfEnrolment">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Enrolment" nillable="true" type="tns:Enrolment" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEnrolment" nillable="true" type="tns:ArrayOfEnrolment" />
+  <xs:complexType name="Enrolment">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="courseID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="grade" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="studentID" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Enrolment" nillable="true" type="tns:Enrolment" />
+  <xs:complexType name="Student">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="dateEnrolled" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="studentID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="studentName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Student" nillable="true" type="tns:Student" />
+  <xs:complexType name="ArrayOfStudent">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Student" nillable="true" type="tns:Student" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfStudent" nillable="true" type="tns:ArrayOfStudent" />
+</xs:schema>

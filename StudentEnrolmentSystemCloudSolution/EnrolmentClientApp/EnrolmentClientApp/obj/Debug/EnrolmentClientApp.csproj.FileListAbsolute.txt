@@ -1,0 +1,12 @@
+C:\Users\jesse\source\repos\EnrolmentClientApp\EnrolmentClientApp\bin\Debug\EnrolmentClientApp.exe.config
+C:\Users\jesse\source\repos\EnrolmentClientApp\EnrolmentClientApp\bin\Debug\EnrolmentClientApp.exe
+C:\Users\jesse\source\repos\EnrolmentClientApp\EnrolmentClientApp\bin\Debug\EnrolmentClientApp.pdb
+C:\Users\jesse\source\repos\EnrolmentClientApp\EnrolmentClientApp\obj\Debug\EnrolmentClientApp.Form1.resources
+C:\Users\jesse\source\repos\EnrolmentClientApp\EnrolmentClientApp\obj\Debug\EnrolmentClientApp.Properties.Resources.resources
+C:\Users\jesse\source\repos\EnrolmentClientApp\EnrolmentClientApp\obj\Debug\EnrolmentClientApp.csproj.GenerateResource.cache
+C:\Users\jesse\source\repos\EnrolmentClientApp\EnrolmentClientApp\obj\Debug\EnrolmentClientApp.csproj.CoreCompileInputs.cache
+C:\Users\jesse\source\repos\EnrolmentClientApp\EnrolmentClientApp\obj\Debug\EnrolmentClientApp.exe
+C:\Users\jesse\source\repos\EnrolmentClientApp\EnrolmentClientApp\obj\Debug\EnrolmentClientApp.pdb
+C:\Users\jesse\source\repos\EnrolmentClientApp\EnrolmentClientApp\obj\Debug\EnrolmentClientApp.csproj.AssemblyReference.cache
+C:\Users\jesse\source\repos\EnrolmentClientApp\EnrolmentClientApp\obj\Debug\EnrolmentClientApp.AddStudentForm.resources
+C:\Users\jesse\source\repos\EnrolmentClientApp\EnrolmentClientApp\obj\Debug\EnrolmentClientApp.AddCourseForm.resources

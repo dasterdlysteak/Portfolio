@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="EnrolmentSystemDBConnectionString-Web.config Connection String" description="EnrolmentSystemDBConnectionString Connection String used in web.config by the application to access the database." defaultValue="Data Source=enrolment-server.database.windows.net;Initial Catalog=EnrolmentSystemDB;Persist Security Info=True;User ID=mysql;Password=Dager123" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\jesse\\source\\repos\\StudentEnrolmentSystem\\StudentEnrolmentSystem\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='EnrolmentSystemDBConnectionString']/@connectionString" />
+  </parameter>
+</parameters>

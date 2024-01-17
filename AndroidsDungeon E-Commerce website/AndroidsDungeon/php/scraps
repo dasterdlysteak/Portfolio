@@ -1,0 +1,52 @@
+  <script>
+    $(document).ready(function(){
+      function fetchData(){
+        var s = $("#input").val();
+
+        if (s == ''){
+          $('#dropdown').css('display', 'none');
+          $('#s-box').css('padding', '5px 16px');
+        }
+        $.post("auto_complete.php", {
+          s:s
+        },
+        function(data, status){
+          if(data != "not found"){
+            $('#dropdown').css('display', 'block');
+            $('#dropdown').html(data);
+          }
+        }
+        );
+      }
+      fetchData();
+    });
+
+/*$query = "SELECT * FROM product WHERE Title LIKE ? LIMIT 5";
+        $param = "%".$_POST['s']."%"
+        $stmt = $mysqli -> prepare($query);
+        // Preparing Statement
+        $stmt -> bind_param("s", $param);
+        // execute statement
+        $stmt -> execute();
+        $result = $stmt -> get_result();
+        if($result->num_rows > 0){
+
+        }
+        else*/
+
+
+
+        <form action="../search.php" method="get">
+                 <div class="s-boxsearch">
+                    <input onkeydown="fetchData()" onkeyup="fetchData()" type="text" id="input" placeholder="Search...">
+                    <button class="search-button" type="submit">
+                        <i class="fa fa-search></i>
+                    </button>
+                 </div>
+        </form>
+        <div class="s-boxsearch">
+            <input onkeydown="fetchData()" onkeyup="fetchData()" type="text" id="input" placeholder="Search...">
+                <a href="#">
+                  <i class="fa fa-search"></i>
+                </a>
+              </div>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Androids Dungeon | Ecommerce Design</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="" />
+  <link rel="stylesheet" type="text/css" href="../css/main.css" />
+  <link rel="icon" href="favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Mooli&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+  
+    <div class="container">
+      <div class="navbar">
+        <div class="logo">
+          <img src="../image/logo.webp" width="75px">
+        </div>
+        <nav>
+          <ul id="MenuItems">
+            <li><a href="../index.php">Home</a></li>
+            <li><a href="products.php">Products</a></li>
+            <li><a href="">Search</a></li>
+            <li><a href="login.html">Login</a></li>
+          </ul>
+        </nav>
+        <a href="cart.php"><img src="../image/shopping-bag.png" width="30px" height="30px"></a>      
+        <img src="../image/menu.png" class="menu-icon" onclick="menutoggle()">
+      </div>
+    </div>
+  <!------ Account-Form ------>   
+  <div class="account-page">
+    <div class="container">
+        <div class="row_account">
+            <div class="col-2">
+                <img src="../image/luffy_login.png" height="400px" width="auto" id="login_img"/>
+            </div>
+            <div class="col-2">
+                <div class="form-container_login" id="login-container">
+                    <div class="form-btn">
+                        <span>Login</span>
+                        <hr id="Indicator">
+                    </div>
+                    <form class="login-form" id="LoginForm" action="../php/login.php" method="post">
+                        <input type="text" name="email" placeholder="Email">
+                        <input type="password" name="password" placeholder="Password">
+                        <button type="submit" class="btn">Login</button>
+                        <a href="">Forgot Passowrd</a>
+                        <br/><br/>
+                        <a href="register.html">Register</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  <!------ footer ------> 
+  <div class="footer">
+    <div class="container">
+      <p class="copywrite">copywrite 2023 - Jesse Hamilton-Young</p>
+    </div>
+  </div>
+  <script>
+    var LoginForm = document.getElementById("LoginForm");
+    var RegForm = document.getElementById("RegForm");
+    var Indicator = document.getElementById("Indicator")
+    
+    function register(){
+        RegForm.style.transform = "translateX(0px)";
+        LoginForm.style.transform = "translateX(0px)";
+        Indicator.style.transform = "translateX(100px)";
+    }
+    function login(){
+        RegForm.style.transform = "translateX(300px)";
+        LoginForm.style.transform = "translateX(300px)";
+        Indicator.style.transform = "translateX(0px)";
+    }
+    var MenuItems = document.getElementById("MenuItems");
+  
+    MenuItems.style.maxHeight = "0px";
+    function menutoggle(){
+      if(MenuItems.style.maxHeight == "0px"){
+        MenuItems.style.maxHeight = "200px";
+      }
+      else{
+        MenuItems.style.maxHeight = "0px";
+      }
+  }
+  </script>
+</body>
+</html>

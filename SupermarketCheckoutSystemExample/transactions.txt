@@ -1,0 +1,61 @@
+transaction on 2022-10-13
+item: 1 - 111
+
+transaction on 2022-10-13
+item: 1 - 111
+
+transaction on 2022-10-13
+item: 1 - 111
+
+transaction on 2022-10-13
+item: 1 - 111
+
+transaction on 2022-10-13
+item: 1 - 111
+
+transaction on 2022-10-15
+item: 1 - 111
+
+transaction on 2022-10-15
+item: 1 - 111
+
+transaction on 2022-10-15
+item: 1 - 111
+item: 2 - 111
+
+transaction on 2022-10-15
+item: 1 - 111
+
+transaction on 2022-10-15
+item: 1 - 112
+item: 2 - 111
+
+transaction on 2022-10-15
+item: 1 - 111 $$2.50
+
+transaction on 2022-10-15
+item: 1 - 112 $4.00
+item: 2 - 111 $2.50
+item: 3 - 113 $5.00
+
+transaction on 2022-10-16
+item: 1 - 112 $4.00
+
+transaction on 2022-10-17
+item: 1 - 111 $2.50
+
+transaction on 2022-10-17
+item: 1 - 111 $2.50
+
+transaction on 2022-10-17
+item: 1 - 111 $2.50
+
+transaction on 2022-11-19
+
+transaction on 2022-11-19
+item: 1 - 102 3.8
+
+transaction on 2022-11-19
+item: 1 - 103 3.5
+item: 2 - 101 4.5
+

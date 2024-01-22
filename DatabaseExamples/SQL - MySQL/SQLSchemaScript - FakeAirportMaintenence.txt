@@ -1,0 +1,470 @@
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+-- -----------------------------------------------------
+-- Schema samsdb
+-- -----------------------------------------------------
+DROP SCHEMA IF EXISTS `samsdb` ;
+
+-- -----------------------------------------------------
+-- Schema samsdb
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `samsdb` DEFAULT CHARACTER SET utf8 ;
+USE `samsdb` ;
+
+-- -----------------------------------------------------
+-- Table `samsdb`.`Technician`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `samsdb`.`Technician` ;
+
+CREATE TABLE IF NOT EXISTS `samsdb`.`Technician` (
+  `EmployeeID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `SupervisorID` INT UNSIGNED NOT NULL,
+  `FirstName` VARCHAR(45) NOT NULL,
+  `LastName` VARCHAR(45) NOT NULL,
+  `StreetAddress` VARCHAR(45) NULL,
+  `Suburb` VARCHAR(45) NULL,
+  `Postcode` VARCHAR(10) NULL,
+  `Phone` VARCHAR(45) NULL,
+  `Salary` DOUBLE UNSIGNED NOT NULL,
+  `LoginName` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`EmployeeID`),
+  UNIQUE INDEX `EmployeeID_UNIQUE` (`EmployeeID` ASC) VISIBLE,
+  INDEX `fk_Technician_Technician1_idx` (`SupervisorID` ASC) VISIBLE,
+  UNIQUE INDEX `Phone_UNIQUE` (`Phone` ASC) VISIBLE,
+  UNIQUE INDEX `LoginName_UNIQUE` (`LoginName` ASC) VISIBLE,
+  CONSTRAINT `fk_Technician_Technician1`
+    FOREIGN KEY (`SupervisorID`)
+    REFERENCES `samsdb`.`Technician` (`EmployeeID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `samsdb`.`Country`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `samsdb`.`Country` ;
+
+CREATE TABLE IF NOT EXISTS `samsdb`.`Country` (
+  `CountryID` VARCHAR(10) NOT NULL,
+  `CountryName` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`CountryID`),
+  UNIQUE INDEX `CountryName_UNIQUE` (`CountryName` ASC) VISIBLE)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `samsdb`.`Airline`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `samsdb`.`Airline` ;
+
+CREATE TABLE IF NOT EXISTS `samsdb`.`Airline` (
+  `AirlineID` VARCHAR(2) NOT NULL,
+  `CountryID` VARCHAR(10) NOT NULL,
+  `AirlineName` VARCHAR(45) NULL,
+  `Street` VARCHAR(45) NULL,
+  `Suburb` VARCHAR(45) NULL,
+  `PostCode` VARCHAR(10) NULL,
+  `State` VARCHAR(45) NULL,
+  `Country` VARCHAR(45) NULL,
+  `ContactPhone` VARCHAR(45) NOT NULL,
+  `WebsiteAddress` VARCHAR(45) NULL,
+  PRIMARY KEY (`AirlineID`),
+  INDEX `fk_Airline_Country1_idx` (`CountryID` ASC) VISIBLE,
+  UNIQUE INDEX `ContactPhone_UNIQUE` (`ContactPhone` ASC) VISIBLE,
+  CONSTRAINT `fk_Airline_Country1`
+    FOREIGN KEY (`CountryID`)
+    REFERENCES `samsdb`.`Country` (`CountryID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `samsdb`.`Manufacturer`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `samsdb`.`Manufacturer` ;
+
+CREATE TABLE IF NOT EXISTS `samsdb`.`Manufacturer` (
+  `ManufacturerID` INT UNSIGNED NOT NULL,
+  `ManufacturerName` VARCHAR(45) NULL,
+  PRIMARY KEY (`ManufacturerID`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `samsdb`.`AircraftModel`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `samsdb`.`AircraftModel` ;
+
+CREATE TABLE IF NOT EXISTS `samsdb`.`AircraftModel` (
+  `ModelID` VARCHAR(4) NOT NULL,
+  `ManufacturerID` INT UNSIGNED NOT NULL,
+  PRIMARY KEY (`ModelID`),
+  UNIQUE INDEX `ModelID_UNIQUE` (`ModelID` ASC) VISIBLE,
+  INDEX `fk_AircraftModel_Manufacturer1_idx` (`ManufacturerID` ASC) VISIBLE,
+  CONSTRAINT `fk_AircraftModel_Manufacturer1`
+    FOREIGN KEY (`ManufacturerID`)
+    REFERENCES `samsdb`.`Manufacturer` (`ManufacturerID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `samsdb`.`EngineModel`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `samsdb`.`EngineModel` ;
+
+CREATE TABLE IF NOT EXISTS `samsdb`.`EngineModel` (
+  `EngineModelName` VARCHAR(30) NOT NULL,
+  `ThrustRange` INT UNSIGNED NOT NULL,
+  `DryWeight` INT UNSIGNED NOT NULL,
+  `MadeBy` VARCHAR(45) NULL,
+  PRIMARY KEY (`EngineModelName`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `samsdb`.`AircraftSubmodel`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `samsdb`.`AircraftSubmodel` ;
+
+CREATE TABLE IF NOT EXISTS `samsdb`.`AircraftSubmodel` (
+  `SubmodelID` INT UNSIGNED NOT NULL,
+  `ModelID` VARCHAR(4) NOT NULL,
+  `EngineModelName` VARCHAR(30) NOT NULL,
+  `Length` DECIMAL(6,2) UNSIGNED NOT NULL,
+  `Height` DECIMAL(6,2) UNSIGNED NOT NULL,
+  `Wingspan` DECIMAL(6,2) UNSIGNED NOT NULL,
+  `MaxPayloadWeight` INT UNSIGNED NOT NULL,
+  `MaxCruisingSpeed` INT UNSIGNED NOT NULL,
+  `MaximumRange` INT UNSIGNED NOT NULL,
+  PRIMARY KEY (`SubmodelID`),
+  INDEX `fk_AircraftSubmodel_AircraftModel1_idx` (`ModelID` ASC) VISIBLE,
+  INDEX `fk_AircraftSubmodel_EngineModel1_idx` (`EngineModelName` ASC) VISIBLE,
+  CONSTRAINT `fk_AircraftSubmodel_AircraftModel1`
+    FOREIGN KEY (`ModelID`)
+    REFERENCES `samsdb`.`AircraftModel` (`ModelID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_AircraftSubmodel_EngineModel1`
+    FOREIGN KEY (`EngineModelName`)
+    REFERENCES `samsdb`.`EngineModel` (`EngineModelName`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `samsdb`.`Aircraft`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `samsdb`.`Aircraft` ;
+
+CREATE TABLE IF NOT EXISTS `samsdb`.`Aircraft` (
+  `AircraftID` VARCHAR(6) NOT NULL,
+  `AviationRegistrationNumber` VARCHAR(6) NOT NULL,
+  `AircraftName` VARCHAR(45) NULL,
+  `SubmodelID` INT UNSIGNED NOT NULL,
+  PRIMARY KEY (`AircraftID`),
+  UNIQUE INDEX `AviationRegistrationNumber_UNIQUE` (`AviationRegistrationNumber` ASC) VISIBLE,
+  INDEX `fk_Aircraft_AircraftSubmodel1_idx` (`SubmodelID` ASC) VISIBLE,
+  CONSTRAINT `fk_Aircraft_AircraftSubmodel1`
+    FOREIGN KEY (`SubmodelID`)
+    REFERENCES `samsdb`.`AircraftSubmodel` (`SubmodelID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `samsdb`.`Engine`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `samsdb`.`Engine` ;
+
+CREATE TABLE IF NOT EXISTS `samsdb`.`Engine` (
+  `EngineNo` VARCHAR(30) NOT NULL,
+  `AircraftID` VARCHAR(6) NOT NULL,
+  `EngineModelName` VARCHAR(30) NOT NULL,
+  `DateManufactured` DATE NULL,
+  PRIMARY KEY (`EngineNo`),
+  INDEX `fk_Engine_Aircraft1_idx` (`AircraftID` ASC) VISIBLE,
+  INDEX `fk_Engine_EngineModel1_idx` (`EngineModelName` ASC) VISIBLE,
+  CONSTRAINT `fk_Engine_Aircraft1`
+    FOREIGN KEY (`AircraftID`)
+    REFERENCES `samsdb`.`Aircraft` (`AircraftID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Engine_EngineModel1`
+    FOREIGN KEY (`EngineModelName`)
+    REFERENCES `samsdb`.`EngineModel` (`EngineModelName`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `samsdb`.`CargoAircraft`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `samsdb`.`CargoAircraft` ;
+
+CREATE TABLE IF NOT EXISTS `samsdb`.`CargoAircraft` (
+  `AircraftID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `SubmodelID` INT UNSIGNED NOT NULL,
+  `MaximumCargoWeight` INT UNSIGNED NULL,
+  `MainDeckCapacity` DECIMAL(6,2) UNSIGNED NULL,
+  `LowerDeckCapacity` DECIMAL(6,2) UNSIGNED NULL,
+  PRIMARY KEY (`AircraftID`),
+  INDEX `fk_CargoAircraft_AircraftSubmodel1_idx` (`SubmodelID` ASC) VISIBLE,
+  CONSTRAINT `fk_CargoAircraft_AircraftSubmodel1`
+    FOREIGN KEY (`SubmodelID`)
+    REFERENCES `samsdb`.`AircraftSubmodel` (`SubmodelID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `samsdb`.`PassengerAircraft`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `samsdb`.`PassengerAircraft` ;
+
+CREATE TABLE IF NOT EXISTS `samsdb`.`PassengerAircraft` (
+  `AircraftID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `SubmodelID` INT UNSIGNED NOT NULL,
+  `MaxNoPassengers1stClass` INT UNSIGNED NULL,
+  `MaxNoPassengersEconomy` INT UNSIGNED NULL,
+  `MaxNoPassengers` INT UNSIGNED NULL,
+  PRIMARY KEY (`AircraftID`),
+  INDEX `fk_PassengerAircraft_AircraftSubmodel1_idx` (`SubmodelID` ASC) VISIBLE,
+  CONSTRAINT `fk_PassengerAircraft_AircraftSubmodel1`
+    FOREIGN KEY (`SubmodelID`)
+    REFERENCES `samsdb`.`AircraftSubmodel` (`SubmodelID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `samsdb`.`TrainingModule`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `samsdb`.`TrainingModule` ;
+
+CREATE TABLE IF NOT EXISTS `samsdb`.`TrainingModule` (
+  `TrainingModuleID` INT UNSIGNED NOT NULL,
+  `ModuleName` VARCHAR(45) NULL,
+  `TrainingDate` DATE NULL,
+  PRIMARY KEY (`TrainingModuleID`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `samsdb`.`TrainingTechnician`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `samsdb`.`TrainingTechnician` ;
+
+CREATE TABLE IF NOT EXISTS `samsdb`.`TrainingTechnician` (
+  `CompletionStatus` ENUM('PASS', 'FAIL') NOT NULL,
+  `TrainingModuleID` INT UNSIGNED NOT NULL,
+  `EmployeeID` INT UNSIGNED NOT NULL,
+  PRIMARY KEY (`TrainingModuleID`, `EmployeeID`),
+  INDEX `fk_Training/Technician_Technician1_idx` (`EmployeeID` ASC) VISIBLE,
+  CONSTRAINT `fk_Training/Technician_TrainingModule1`
+    FOREIGN KEY (`TrainingModuleID`)
+    REFERENCES `samsdb`.`TrainingModule` (`TrainingModuleID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Training/Technician_Technician1`
+    FOREIGN KEY (`EmployeeID`)
+    REFERENCES `samsdb`.`Technician` (`EmployeeID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `samsdb`.`Manager`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `samsdb`.`Manager` ;
+
+CREATE TABLE IF NOT EXISTS `samsdb`.`Manager` (
+  `ManagerID` INT UNSIGNED NOT NULL,
+  `ManagementCommencementDate` DATE NOT NULL,
+  INDEX `fk_Manager_Technician1_idx` (`ManagerID` ASC) VISIBLE,
+  PRIMARY KEY (`ManagerID`),
+  UNIQUE INDEX `ManagerID_UNIQUE` (`ManagerID` ASC) VISIBLE,
+  CONSTRAINT `fk_Manager_Technician1`
+    FOREIGN KEY (`ManagerID`)
+    REFERENCES `samsdb`.`Technician` (`EmployeeID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `samsdb`.`TestEvent`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `samsdb`.`TestEvent` ;
+
+CREATE TABLE IF NOT EXISTS `samsdb`.`TestEvent` (
+  `TestEventID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `AircraftID` VARCHAR(6) NOT NULL,
+  `ManagerID` INT UNSIGNED NOT NULL,
+  `StartTestDateTime` DATETIME NULL,
+  `EndTestDateTime` DATETIME NULL,
+  `NoOfHours` DECIMAL(5,2) UNSIGNED NULL,
+  `TestResult` ENUM('PASS', 'FAIL') NULL,
+  `ResultComments` VARCHAR(150) NULL,
+  PRIMARY KEY (`TestEventID`),
+  INDEX `fk_TestEvent_Aircraft1_idx` (`AircraftID` ASC) VISIBLE,
+  INDEX `fk_TestEvent_Technician1_idx` (`ManagerID` ASC) VISIBLE,
+  CONSTRAINT `fk_TestEvent_Aircraft1`
+    FOREIGN KEY (`AircraftID`)
+    REFERENCES `samsdb`.`Aircraft` (`AircraftID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_TestEvent_Technician1`
+    FOREIGN KEY (`ManagerID`)
+    REFERENCES `samsdb`.`Technician` (`EmployeeID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `samsdb`.`Test`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `samsdb`.`Test` ;
+
+CREATE TABLE IF NOT EXISTS `samsdb`.`Test` (
+  `TestID` INT NOT NULL,
+  `TestName` VARCHAR(45) NULL,
+  PRIMARY KEY (`TestID`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `samsdb`.`TestItem`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `samsdb`.`TestItem` ;
+
+CREATE TABLE IF NOT EXISTS `samsdb`.`TestItem` (
+  `ItemCode` INT UNSIGNED NOT NULL,
+  `ItemName` VARCHAR(45) NOT NULL,
+  `TestResult` ENUM('PASS', 'FAIL') NULL,
+  `TestID` INT NOT NULL,
+  PRIMARY KEY (`ItemCode`),
+  INDEX `fk_TestItem_Test1_idx` (`TestID` ASC) VISIBLE,
+  CONSTRAINT `fk_TestItem_Test1`
+    FOREIGN KEY (`TestID`)
+    REFERENCES `samsdb`.`Test` (`TestID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `samsdb`.`TestItemTestEvent`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `samsdb`.`TestItemTestEvent` ;
+
+CREATE TABLE IF NOT EXISTS `samsdb`.`TestItemTestEvent` (
+  `TestEventID` INT UNSIGNED NOT NULL,
+  `ItemCode` INT UNSIGNED NOT NULL,
+  PRIMARY KEY (`TestEventID`, `ItemCode`),
+  INDEX `fk_TestItemTestEvent_TestEvent1_idx` (`TestEventID` ASC) VISIBLE,
+  INDEX `fk_TestItemTestEvent_TestItem1_idx` (`ItemCode` ASC) VISIBLE,
+  CONSTRAINT `fk_TestItemTestEvent_TestEvent1`
+    FOREIGN KEY (`TestEventID`)
+    REFERENCES `samsdb`.`TestEvent` (`TestEventID`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_TestItemTestEvent_TestItem1`
+    FOREIGN KEY (`ItemCode`)
+    REFERENCES `samsdb`.`TestItem` (`ItemCode`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `samsdb`.`AircraftModelQualifiedTechnician`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `samsdb`.`AircraftModelQualifiedTechnician` ;
+
+CREATE TABLE IF NOT EXISTS `samsdb`.`AircraftModelQualifiedTechnician` (
+  `ModelID` VARCHAR(4) NOT NULL,
+  `TrainingModuleID` INT UNSIGNED NOT NULL,
+  `EmployeeID` INT UNSIGNED NOT NULL,
+  PRIMARY KEY (`ModelID`, `TrainingModuleID`, `EmployeeID`),
+  INDEX `fk_AircraftModel/QualifiedTechnician_AircraftModel1_idx` (`ModelID` ASC) VISIBLE,
+  INDEX `fk_AircraftModelQualifiedTechnician_TrainingTechnician1_idx` (`TrainingModuleID` ASC, `EmployeeID` ASC) VISIBLE,
+  CONSTRAINT `fk_AircraftModel/QualifiedTechnician_AircraftModel1`
+    FOREIGN KEY (`ModelID`)
+    REFERENCES `samsdb`.`AircraftModel` (`ModelID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_AircraftModelQualifiedTechnician_TrainingTechnician1`
+    FOREIGN KEY (`TrainingModuleID` , `EmployeeID`)
+    REFERENCES `samsdb`.`TrainingTechnician` (`TrainingModuleID` , `EmployeeID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `samsdb`.`TechnicianTestItemTestEvent`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `samsdb`.`TechnicianTestItemTestEvent` ;
+
+CREATE TABLE IF NOT EXISTS `samsdb`.`TechnicianTestItemTestEvent` (
+  `EmployeeID` INT UNSIGNED NOT NULL,
+  `TestEventID` INT UNSIGNED NOT NULL,
+  `ItemCode` INT UNSIGNED NOT NULL,
+  PRIMARY KEY (`EmployeeID`, `TestEventID`, `ItemCode`),
+  INDEX `fk_TechnicianTestItemTestEvent_Technician1_idx` (`EmployeeID` ASC) VISIBLE,
+  INDEX `fk_TechnicianTestItemTestEvent_TestItemTestEvent1_idx` (`TestEventID` ASC, `ItemCode` ASC) VISIBLE,
+  CONSTRAINT `fk_TechnicianTestItemTestEvent_Technician1`
+    FOREIGN KEY (`EmployeeID`)
+    REFERENCES `samsdb`.`Technician` (`EmployeeID`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_TechnicianTestItemTestEvent_TestItemTestEvent1`
+    FOREIGN KEY (`TestEventID` , `ItemCode`)
+    REFERENCES `samsdb`.`TestItemTestEvent` (`TestEventID` , `ItemCode`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `samsdb`.`OwnedAircraft`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `samsdb`.`OwnedAircraft` ;
+
+CREATE TABLE IF NOT EXISTS `samsdb`.`OwnedAircraft` (
+  `AirlineID` VARCHAR(2) NOT NULL,
+  `AircraftID` VARCHAR(6) NOT NULL,
+  `DateOwned` DATE NULL,
+  PRIMARY KEY (`AirlineID`, `AircraftID`),
+  INDEX `fk_OwnedAircraft_Aircraft1_idx` (`AircraftID` ASC) VISIBLE,
+  CONSTRAINT `fk_OwnedAircraft_Airline1`
+    FOREIGN KEY (`AirlineID`)
+    REFERENCES `samsdb`.`Airline` (`AirlineID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_OwnedAircraft_Aircraft1`
+    FOREIGN KEY (`AircraftID`)
+    REFERENCES `samsdb`.`Aircraft` (`AircraftID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

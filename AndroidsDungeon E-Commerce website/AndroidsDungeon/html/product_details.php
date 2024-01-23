@@ -13,64 +13,62 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-    <div class="container">
-      <div class="navbar">
-        <div class="logo">
-          <img src="../image/logo.webp" width="75px">
-        </div>
-        <nav>
-          <ul id="MenuItems">
-          <li>  
-          <div class="s-box" id="s-box" tabindex="0">
-              <form  action="search.php" method="POST">
-                    <div class="s-boxsearch">
-                        <input autocomplete="off" onkeydown="fetchData()" onkeyup="fetchData()" type="text" name="input" id="input" placeholder="Search...">
-                        <button class="search-button" type="submit">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </div>
-                </form>
-                <ul class="dropdown" id="dropdown">
+  <div class="page-container">
+    <div class="content-wrap">
+        <div class="container">
+          <div class="navbar">
+            <div class="logo">
+              <img src="../image/logo.webp" width="75px">
+            </div>
+            <nav>
+              <ul id="MenuItems">
+              <li>  
+              <div class="s-box" id="s-box" tabindex="0">
+                  <form  action="search.php" method="POST">
+                        <div class="s-boxsearch">
+                            <input autocomplete="off" onkeydown="fetchData()" onkeyup="fetchData()" type="text" name="input" id="input" placeholder="Search...">
+                            <button class="search-button" type="submit">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
+                    </form>
+                    <ul class="dropdown" id="dropdown">
 
-                </ul>
-              </div>
-          </li>
-            <li><a href="../index.php">Home</a></li>
-            <li><a href="products.php">Products</a></li>
-            <li><a href="search.php">Search</a></li>
-            <li><a href="login.html">Login</a></li>
-          </ul>
-        </nav>
-        <a href="cart.php"><img src="../image/shopping-bag.png" width="30px" height="30px"></a>      
-        <img src="../image/menu.png" class="menu-icon" onclick="menutoggle()">
+                    </ul>
+                  </div>
+              </li>
+                <li><a href="../index.php">Home</a></li>
+                <li><a href="products.php">Products</a></li>
+                <li><a href="search.php">Search</a></li>
+                <li><a href="login.html">Login</a></li>
+              </ul>
+            </nav>
+            <a href="cart.php"><img src="../image/shopping-bag.png" width="30px" height="30px"></a>      
+            <img src="../image/menu.png" class="menu-icon" onclick="menutoggle()">
+          </div>
+        </div>  
+      <!------ single product details ------>
+        <div class="small-container single-product">
+            <div class="row">
+                <?php include("../php/load-product-details.php"); ?>
+            </div>
+        </div>
+        <div class="small-container">
+            <div class="row row2">
+                <h2>Related Products</h2>
+            </div>
+        </div>
+      <div class="small-container">  
+        <div class="row">
+          <?php include("../php/load_products.php"); ?>
+        </div>
       </div>
     </div>
-  
-  <!------ single product details ------>
-    <div class="small-container single-product">
-        <div class="row">
-            <?php include("../php/load-product-details.php"); ?>
-        </div>
-    </div>
-
-
-    <div class="small-container">
-        <div class="row row2">
-            <h2>Related Products</h2>
-        </div>
-    </div>
-
-  <div class="small-container">
-
-  
-    <div class="row">
-      <?php include("../php/load_products.php"); ?>
-    </div>
-  </div>
-  <!------ footer ------> 
-  <div class="footer">
-    <div class="container">
-      <p class="copywrite">copywrite 2023 - Jesse Hamilton-Young</p>
+    <!------ footer ------> 
+    <div class="footer">
+      <div class="container">
+        <p class="copywrite">copywrite 2023 - Jesse Hamilton-Young</p>
+      </div>
     </div>
   </div>
   <script>
@@ -105,33 +103,34 @@
     { 
       var results=http.responseText; 
       //Modify the script to change the html element
-      document.getElementById('dropdown').innerHTML = results; 
-      } 
+      if (results.trim() === "") {
+        document.getElementById('s-box').style.borderRadius = '30px';
+        document.getElementById('dropdown').innerHTML = results; 
+      } else {
+        var title = document.getElementById("input").value; 
+        if (title === "") {
+          document.getElementById('dropdown').style.display = 'none';
+          document.getElementById('s-box').style.padding = '5px 15px';
+          document.getElementById('s-box').style.borderRadius = '30px';
+        } else {
+          document.getElementById('dropdown').style.display = 'block';
+          document.getElementById('s-box').style.padding = '5px 0px';
+          document.getElementById('s-box').style.borderRadius = '15px 15px 0 0';
+        }
+        document.getElementById('dropdown').innerHTML = results; 
+      }
+    } 
   } 
   // The server-side script URL
   var url = "../php/auto_complete.php?title="; 
-  function fetchData()
-  {      
+  function fetchData() {      
     var title = document.getElementById("input").value; 
-    if (title == ""){
-      document.getElementById('dropdown').style.display = 'none';
-      document.getElementById('s-box').style.padding = '5px 15px';
-      document.getElementById('s-box').style.borderRadius = '30px';
-      
-    }
-    else{
-      document.getElementById('dropdown').style.display = 'block';
-      document.getElementById('s-box').style.padding = '5px 0px';
-      document.getElementById('s-box').style.borderRadius = '15px 15px 0 0';
-    }
-      http.open("GET", url + title, true); 
-      http.onreadystatechange = handleHttpResponse; 
-      http.send(null); 
-    }
-    
-
+    http.open("GET", url + title, true); 
+    http.onreadystatechange = handleHttpResponse; 
+    http.send(null); 
+  }
   </script>
-    <script>
+  <script>
     var MenuItems = document.getElementById("MenuItems");
 
     MenuItems.style.maxHeight = "0px";

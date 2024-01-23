@@ -13,40 +13,44 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-    <div class="container">
-      <div class="navbar">
-        <div class="logo">
-          <img src="../image/logo.webp" width="75px">
+  <div class="page-container">
+    <div class="content-wrap">
+      <div class="container">
+        <div class="navbar">
+          <div class="logo">
+            <img src="../image/logo.webp" width="75px">
+          </div>
+          <nav>
+            <ul id="MenuItems">
+              <li><a href="../index.php">Home</a></li>
+              <li><a href="products.php">Products</a></li>
+              <li><a href="search.php">Search</a></li>
+              <li><a href="login.html">Login</a></li>
+            </ul>
+          </nav>
+          <a href="cart.php"><img src="../image/shopping-bag.png" width="30px" height="30px"></a>      
+          <img src="../image/menu.png" class="menu-icon" onclick="menutoggle()">  
         </div>
-        <nav>
-          <ul id="MenuItems">
-            <li><a href="../index.php">Home</a></li>
-            <li><a href="products.php">Products</a></li>
-            <li><a href="">Search</a></li>
-            <li><a href="login.html">Login</a></li>
-          </ul>
-        </nav>
-        <a href="cart.php"><img src="../image/shopping-bag.png" width="30px" height="30px"></a>      
-        <img src="../image/menu.png" class="menu-icon" onclick="menutoggle()">  
+      </div>
+      
+      <!------ message ------> 
+      <div class="small-container">
+        <h2 class="title">Thank You!</h2>
+        <div class="row">
+          <?php session_start();
+            echo "<h2>Thank You</h2><br>";
+            echo "<h3>Your order Number is: ".$_SESSION['order-id']."</h3>";
+            echo "<img  width='32%' height='auto' src='../image/search-img.png' alt='anime image'>";
+            $_POST["input"] = "";
+            ?>
+        </div>
+      </div>
     </div>
-    </div>
-  
-  <!------ featured catagories ------> 
-  <div class="small-container">
-    <h2 class="title">Thank You!</h2>
-    <div class="row">
-      <?php session_start();
-        echo "<h2>Thank You</h2><br>";
-        echo "<h3>Your order Number is: ".$_SESSION['order-id']."</h3>";
-        echo "<img  width='32%' height='auto' src='../image/search-img.png' alt='anime image'>";
-        $_POST["input"] = "";
-        ?>
-    </div>
-  </div>
-  <!------ featured catagories ------> 
-  <div class="footer">
-    <div class="container">
-      <p class="copywrite">copywrite 2023 - Jesse Hamilton-Young</p>
+    <!------ featured catagories ------> 
+    <div class="footer">
+      <div class="container">
+        <p class="copywrite">copywrite 2023 - Jesse Hamilton-Young</p>
+      </div>
     </div>
   </div>
   <script>

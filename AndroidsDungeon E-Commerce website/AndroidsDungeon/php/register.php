@@ -11,7 +11,8 @@
     $password=$_POST['password'];
     $repassword=$_POST['repassword'];
 
-    if (($first_name == "") or ($last_name == "") or ($email == "")or ($street_address == "") or ($suburb == "") or ($password == "") or ($repassword == ""))
+    if (($first_name == "") or ($last_name == "") or ($email == "")or ($street_address == "") or ($suburb == "") or ($postcode == "") 
+    or ($city == "") or ($phone == "") or ($password == "") or ($repassword == ""))
     {
         echo("Please fill in required fields");
         echo "<a href='../html/register.html' class='btn'>Return to Registration</a>";

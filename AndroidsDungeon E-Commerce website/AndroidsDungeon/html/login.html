@@ -45,9 +45,10 @@
                             <span>Login</span>
                             <hr id="Indicator">
                         </div>
+                        <div id="error"></div>
                         <form class="login-form" id="LoginForm" action="../php/login.php" method="post">
-                            <input type="text" name="email" placeholder="Email">
-                            <input type="password" name="password" placeholder="Password">
+                            <input type="text" name="email" placeholder="Email" id="email">
+                            <input type="password" name="password" placeholder="Password" id="password">
                             <button type="submit" class="btn">Login</button>
                             <a href="">Forgot Passowrd</a>
                             <br/><br/>
@@ -69,7 +70,7 @@
   <script>
     var LoginForm = document.getElementById("LoginForm");
     var RegForm = document.getElementById("RegForm");
-    var Indicator = document.getElementById("Indicator")
+    var Indicator = document.getElementById("Indicator");
     
     function register(){
         RegForm.style.transform = "translateX(0px)";
@@ -91,7 +92,41 @@
       else{
         MenuItems.style.maxHeight = "0px";
       }
-  }
+    }
+
+    function validate() {
+      const form = document.getElementById('LoginForm');
+      const email = document.getElementById('email');
+      const password = document.getElementById('password');
+      const errorElement = document.getElementById('error');
+
+      let messages = [];
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (email.value.trim() === "" || password.value.trim() === "") {
+        messages.push('An Email and Password are required');
+      }
+      else if (!emailRegex.test(email.value.trim())){
+        messages.push('Please enter a valid Email Address');
+      }
+      else if (password.value.trim().length < 8 || password.value.trim().length > 15){
+        messages.push('Password must be within 8 - 15 characters');
+      }
+
+      if (messages.length > 0) {
+        alert(messages.join(', '));
+        return false; // Prevent form submission
+      }
+
+      return true; // Allow form submission
+    }
+
+    // Attach event listener to the form
+    LoginForm.addEventListener('submit', function (e) {
+      if (!validate()) {
+        e.preventDefault(); // Prevent form submission if validation fails
+      }
+    });
   </script>
 </body>
 </html>

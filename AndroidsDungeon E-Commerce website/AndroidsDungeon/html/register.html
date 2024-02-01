@@ -72,6 +72,7 @@
     </div>
   </div>
   <script>
+    const registrationForm = document.getElementById('RegForm');
     var MenuItems = document.getElementById("MenuItems");
 
     MenuItems.style.maxHeight = "0px";
@@ -84,31 +85,35 @@
       }
     }
     function validate() {
-      const form = document.getElementById('LoginForm');
       const email = document.getElementById('email');
       const password = document.getElementById('password');
-      const rePassword = document.getElementById('respassword');
+      const rePassword = document.getElementById('repassword');
       const firstName = document.getElementById('first_name');
       const lastName = document.getElementById('last_name');
       const phone = document.getElementById('phone');
       const streetAddress = document.getElementById('street_address');
       const suburb = document.getElementById('suburb');
       const postcode = document.getElementById('postcode');
-      const city = document.getElementById('city')
+      const city = document.getElementById('city');
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
       // todo: change below script to work with above variables 
 
       let messages = [];
 
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (email.value.trim() === "" || password.value.trim() === "") {
-        messages.push('An Email and Password are required');
+      
+      if (email.value.trim() === "" || password.value.trim() === "" || rePassword.value.trim() === "" || firstName.value.trim() === "" || lastName.value.trim() === ""
+      || phone.value.trim() === "" || streetAddress.value.trim() === "" || suburb.value.trim() === "" || postcode.value.trim() === "" || city.value.trim() === "") {
+        messages.push('Please fill out all fields');
       }
       else if (!emailRegex.test(email.value.trim())){
         messages.push('Please enter a valid Email Address');
       }
       else if (password.value.trim().length < 8 || password.value.trim().length > 15){
         messages.push('Password must be within 8 - 15 characters');
+      }
+      else if (password.value.trim() != rePassword.value.trim()){
+        messages.push('Passwords do not match');
       }
 
       if (messages.length > 0) {
@@ -120,7 +125,7 @@
     }
 
     // Attach event listener to the form
-    LoginForm.addEventListener('submit', function (e) {
+    registrationForm.addEventListener('submit', function (e) {
       if (!validate()) {
         e.preventDefault(); // Prevent form submission if validation fails
       }

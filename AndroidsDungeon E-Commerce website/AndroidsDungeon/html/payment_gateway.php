@@ -81,7 +81,7 @@
                     <h3 class="title">payment</h3>
                     <div class="inputBox">
                         <span>Cards Accepted :</span>
-                        <img src="../image/card_img.png" alt="paypal, visa mastercard, amex">
+                        <img src="../image/card_img.png" alt="paypal, visa, mastercard, amex">
                     </div>
                     <div class="inputBox">
                         <span>Name on Card :</span>

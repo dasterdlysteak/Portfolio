@@ -46,7 +46,13 @@
                 $_SESSION['email'] = $row['Email'];  
                 $_SESSION['phone'] = $row['Phone'];
                 echo"<h2> Authentication Success !!! </h2>";
-                header("location: ../index.php");
+                if($_SESSION['counter'] > 0){
+                    header("location:../html/cart.php");
+                }
+                else{
+                    header("location: ../index.php");
+                }
+                
             }
             else{
                 echo("<h2>Something didnt work retreiving from the customer Table<h2>");

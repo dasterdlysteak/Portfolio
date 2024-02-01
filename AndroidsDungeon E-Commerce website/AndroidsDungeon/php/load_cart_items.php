@@ -5,7 +5,7 @@
     if(isset($_SESSION['cart'])){
         $cart = unserialize($_SESSION['cart']);
     }
-    echo "<form action'../php/proceed_to_payment.php' method='post'>";
+    echo "<form method='post'>";
     for ($i = 0; $i < $cart->get_depth(); $i++){
         $currentProduct = $cart->get_product($i);
         echo "<tr>";

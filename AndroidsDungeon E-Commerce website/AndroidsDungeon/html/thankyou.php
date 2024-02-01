@@ -38,6 +38,8 @@
         <h2 class="title">Thank You!</h2>
         <div class="row">
           <?php session_start();
+            unset($_SESSION['counter']);
+            unset($_SESSION['cart']);
             echo "<h2>Thank You</h2><br>";
             echo "<h3>Your order Number is: ".$_SESSION['order-id']."</h3>";
             echo "<img  width='32%' height='auto' src='../image/search-img.png' alt='anime image'>";

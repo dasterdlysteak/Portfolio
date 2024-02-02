@@ -41,9 +41,9 @@
         // connect to the db
         require_once('conn_contract_db.php');
         // defining queries
-        $query1 = "INSERT INTO `Order` (OrderId, OrderTotal, CustomerID) VALUES(?, ?, ?)";
-        $query2 = "INSERT INTO OrderProduct VALUES(?, ?, ?)";
-        $query3 = "INSERT INTO PaymentDetails VALUES(?, ?, ?, ?, ?)";
+        $query1 = "INSERT INTO `order` (OrderId, OrderTotal, CustomerID) VALUES(?, ?, ?)";
+        $query2 = "INSERT INTO order_product VALUES(?, ?, ?)";
+        $query3 = "INSERT INTO payment_details VALUES(?, ?, ?, ?, ?)";
 
         try {
             $stmt = $mysqli->prepare($query1);

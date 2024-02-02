@@ -68,7 +68,7 @@ CREATE TABLE `customer` (
 -- Table structure for table `customerproductreview`
 --
 
-CREATE TABLE `customerproductreview` (
+CREATE TABLE `customer_product_review` (
   `CustomerID` int(11) NOT NULL,
   `ReviewID` int(11) NOT NULL,
   `ProductID` int(11) NOT NULL
@@ -80,7 +80,7 @@ CREATE TABLE `customerproductreview` (
 -- Table structure for table `logindetails`
 --
 
-CREATE TABLE `logindetails` (
+CREATE TABLE `login_details` (
   `Email` varchar(45) NOT NULL,
   `Password` varchar(256) DEFAULT NULL,
   `CustomerID` int(11) NOT NULL
@@ -118,7 +118,7 @@ CREATE TABLE `order` (
 -- Table structure for table `orderproduct`
 --
 
-CREATE TABLE `orderproduct` (
+CREATE TABLE `order_product` (
   `OrderId` VARCHAR(30) NOT NULL,
   `ProductID` int(11) NOT NULL,
   `QtyOrdered` int(11) DEFAULT NULL
@@ -135,7 +135,7 @@ CREATE TABLE `orderproduct` (
 -- Table structure for table `paymentdetails`
 --
 
-CREATE TABLE `paymentdetails` (
+CREATE TABLE `payment_details` (
   `CardNo` varchar(16) NOT NULL,
   `Expiry` varchar(5) NOT NULL,
   `CustomerID` int(11) NOT NULL,
@@ -210,7 +210,7 @@ ALTER TABLE `customer`
 --
 -- Indexes for table `customerproductreview`
 --
-ALTER TABLE `customerproductreview`
+ALTER TABLE `customer_product_review`
   ADD PRIMARY KEY (`CustomerID`,`ReviewID`,`ProductID`),
   ADD KEY `fk_Customer_has_Review_Review1_idx` (`ReviewID`),
   ADD KEY `fk_Customer_has_Review_Customer1_idx` (`CustomerID`),
@@ -219,7 +219,7 @@ ALTER TABLE `customerproductreview`
 --
 -- Indexes for table `logindetails`
 --
-ALTER TABLE `logindetails`
+ALTER TABLE `login_details`
   ADD PRIMARY KEY (`CustomerID`),
   ADD KEY `fk_LoginDetails_Customer1_idx` (`CustomerID`);
 
@@ -233,7 +233,7 @@ ALTER TABLE `order`
 --
 -- Indexes for table `orderproduct`
 --
-ALTER TABLE `orderproduct`
+ALTER TABLE `order_product`
   ADD PRIMARY KEY (`OrderId`,`ProductID`),
   ADD KEY `fk_Order_has_Product_Product1_idx` (`ProductID`),
   ADD KEY `fk_Order_has_Product_Order1_idx` (`OrderId`);
@@ -241,7 +241,7 @@ ALTER TABLE `orderproduct`
 --
 -- Indexes for table `paymentdetails`
 --
-ALTER TABLE `paymentdetails`
+ALTER TABLE `payment_details`
   ADD PRIMARY KEY (`CustomerID`,`OrderID`);
 
 --
@@ -291,7 +291,7 @@ ALTER TABLE `address`
 --
 -- Constraints for table `customerproductreview`
 --
-ALTER TABLE `customerproductreview`
+ALTER TABLE `customer_product_review`
   ADD CONSTRAINT `fk_Customer_has_Review_Customer1` FOREIGN KEY (`CustomerID`) REFERENCES `customer` (`CustomerID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_Customer_has_Review_Product1` FOREIGN KEY (`ProductID`) REFERENCES `product` (`ProductID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_Customer_has_Review_Review1` FOREIGN KEY (`ReviewID`) REFERENCES `review` (`ReviewID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
@@ -299,7 +299,7 @@ ALTER TABLE `customerproductreview`
 --
 -- Constraints for table `logindetails`
 --
-ALTER TABLE `logindetails`
+ALTER TABLE `login_details`
   ADD CONSTRAINT `fk_LoginDetails_Customer1` FOREIGN KEY (`CustomerID`) REFERENCES `customer` (`CustomerID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
@@ -311,14 +311,14 @@ ALTER TABLE `order`
 --
 -- Constraints for table `orderproduct`
 --
-ALTER TABLE `orderproduct`
+ALTER TABLE `order_product`
   ADD CONSTRAINT `fk_Order_has_Product_Order1` FOREIGN KEY (`OrderId`) REFERENCES `order` (`OrderId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_Order_has_Product_Product1` FOREIGN KEY (`ProductID`) REFERENCES `product` (`ProductID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `paymentdetails`
 --
-ALTER TABLE `paymentdetails`
+ALTER TABLE `payment_details`
   ADD CONSTRAINT `fk_PaymentDetails_Customer1` FOREIGN KEY (`CustomerID`) REFERENCES `customer` (`CustomerID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 

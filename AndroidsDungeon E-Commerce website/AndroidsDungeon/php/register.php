@@ -46,10 +46,10 @@
         // defining queries
         $key = "123abc";
         $password = crypt($password, $key);
-        $query1 = "INSERT INTO Customer (FirstName, LastName, Email, Phone) VALUES(?, ?, ?, ?)";
+        $query1 = "INSERT INTO customer (FirstName, LastName, Email, Phone) VALUES(?, ?, ?, ?)";
         $query2 = "SELECT CustomerID FROM Customer WHERE Email LIKE ?";
-        $query3 = "INSERT INTO `Address` VALUES(?, ?, ?, ?, ?)";
-        $query4 = "INSERT INTO LoginDetails VALUES(?, ?, ?)";
+        $query3 = "INSERT INTO `address` VALUES(?, ?, ?, ?, ?)";
+        $query4 = "INSERT INTO login_details VALUES(?, ?, ?)";
 
         try {
             $stmt = $mysqli->prepare($query1);

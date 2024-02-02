@@ -15,7 +15,7 @@
         $key = "123abc";
         $password = crypt($password, $key);
         // preparing query
-        $query = "SELECT * FROM LoginDetails where (Email = ?) AND (`password` = ?)";
+        $query = "SELECT * FROM login_details where (Email = ?) AND (`password` = ?)";
         $stmt = $mysqli -> prepare($query);
         // Preparing Statement
         $stmt -> bind_param("ss", $email, $password);
@@ -26,7 +26,7 @@
         if($result->num_rows == 1) {
             $row = $result -> fetch_array();
             $_SESSION['customer_id'] = $row['CustomerID'];
-            $query = "SELECT * FROM Customer WHERE (CustomerID = ?)";
+            $query = "SELECT * FROM customer WHERE (CustomerID = ?)";
             try{
                 $stmt = $mysqli -> prepare($query);
                 $stmt -> bind_param("i", $_SESSION['customer_id']);

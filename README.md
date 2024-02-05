@@ -6,5 +6,5 @@ This portfolio aims to serve as a guide in order for prospective employers to se
 
 ## Projects
 ### AndroidsDungeon E-Commerce Website
-(Tidbits/AndroidsDungeonExample.png)
+![Image of AndroidsDungeon Home page](Tidbits/AndroidsDungeonExample.png)
 

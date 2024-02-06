@@ -13,3 +13,14 @@ a project focusing on creating a faux storefront for a comic book store
 ### Student Enrolment System Cloud solution
 ![Image of Cloud App](Tidbits/CloudAppExample.png)
 
+### Node JS Rest API
+
+### Java Enterprise Book Shop
+
+### Python Supermarket Checkout System
+
+### C# algorithm Experience
+
+### Agile Methodology and UML experience
+
+### Database Experience
